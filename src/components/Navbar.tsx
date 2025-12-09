@@ -1,4 +1,4 @@
-import './Navbar.css'
+import './Navbar.scss'
 import drivelahLogo from '/drivelah-logo.png'
 
 function Navbar() {
