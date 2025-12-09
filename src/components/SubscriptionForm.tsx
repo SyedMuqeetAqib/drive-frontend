@@ -1,12 +1,27 @@
 import { useState } from "react";
 import "./SubscriptionForm.scss";
 import PlanCard from "./PlanCard";
+import AddonItem from "./AddonItem/AddonItem";
+import CardInput from "./CardInput/CardInput";
 import lockIcon from "../assets/icons/Lock.svg";
 import eIcon from "../assets/icons/e.svg";
 import groupIcon from "../assets/icons/Group 5171.svg";
 
 function SubscriptionForm() {
   const [selectedPlan, setSelectedPlan] = useState("best-mates");
+  const [selectedAddons, setSelectedAddons] = useState<Set<string>>(new Set());
+
+  const handleAddonChange = (id: string, checked: boolean) => {
+    setSelectedAddons((prev) => {
+      const newSet = new Set(prev);
+      if (checked) {
+        newSet.add(id);
+      } else {
+        newSet.delete(id);
+      }
+      return newSet;
+    });
+  };
 
   const steps = [
     { id: "location", label: "Location", completed: true },
@@ -137,8 +152,7 @@ function SubscriptionForm() {
           </div>
           <div className="form-section-content">
             <h1 className="form-title">Select your plan</h1>
-            <section className="form-section">
-              {/* Add here a vertical line */}
+            <section>
               <div className="plans-grid">
                 {plans.map((plan) => (
                   <PlanCard
@@ -154,113 +168,36 @@ function SubscriptionForm() {
                 ))}
               </div>
             </section>
-
-            {/* Add-ons Section */}
-            <section className="form-section">
+          </div>
+          <div className="form-section-content">
+            <section>
               <h2 className="form-title">
                 Select add-ons for your subscription
               </h2>
               <div className="addons-list">
-                <div className="addon-item">
-                  <input
-                    type="checkbox"
-                    id="addon-gps"
-                    name="addons"
-                    value="gps"
-                    className="addon-checkbox"
-                  />
-                  <label htmlFor="addon-gps" className="addon-label">
-                    <span className="addon-name">BYO secondary GPS</span>
-                    <span className="addon-price">$5/month</span>
-                  </label>
-                </div>
-
-                <div className="addon-item addon-item-disabled">
-                  <div className="coming-soon-badge">Coming soon</div>
-                  <input
-                    type="checkbox"
-                    id="addon-insurance"
-                    name="addons"
-                    value="insurance"
-                    className="addon-checkbox"
-                    disabled
-                  />
-                  <label htmlFor="addon-insurance" className="addon-label">
-                    <span className="addon-name">Between trip insurance</span>
-                  </label>
-                </div>
+                <AddonItem
+                  id="addon-gps"
+                  name="BYO secondary GPS - $5/month"
+                  checked={selectedAddons.has("addon-gps")}
+                  onChange={handleAddonChange}
+                />
+                <AddonItem
+                  id="addon-insurance"
+                  name="Between trip insurance"
+                  disabled={true}
+                  comingSoon={true}
+                  checked={selectedAddons.has("addon-insurance")}
+                  onChange={handleAddonChange}
+                />
               </div>
             </section>
-
+          </div>
+          <div className="form-section-content">
             {/* Payment Details Section */}
-            <section className="form-section">
-              <h2 className="section-title">Add card details</h2>
+            <section>
+              <h2 className="form-title">Add card details</h2>
               <div className="payment-form">
-                <div className="form-group">
-                  <label htmlFor="card-number" className="form-label">
-                    Card Number
-                  </label>
-                  <div className="input-wrapper">
-                    <input
-                      type="text"
-                      id="card-number"
-                      name="card-number"
-                      placeholder="1234 5678 1234 5678"
-                      className="form-input"
-                    />
-                    <svg
-                      className="card-icon"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <rect
-                        x="2"
-                        y="5"
-                        width="20"
-                        height="14"
-                        rx="2"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                      />
-                      <path
-                        d="M2 10H22"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                      />
-                    </svg>
-                  </div>
-                </div>
-
-                <div className="form-row">
-                  <div className="form-group">
-                    <label htmlFor="expiry-date" className="form-label">
-                      Expiry Date
-                    </label>
-                    <input
-                      type="text"
-                      id="expiry-date"
-                      name="expiry-date"
-                      placeholder="MM/YY"
-                      className="form-input"
-                    />
-                  </div>
-
-                  <div className="form-group">
-                    <label htmlFor="cvc" className="form-label">
-                      CVC
-                    </label>
-                    <input
-                      type="text"
-                      id="cvc"
-                      name="cvc"
-                      placeholder="CVC"
-                      className="form-input"
-                    />
-                  </div>
-                </div>
+                <CardInput />
 
                 <p className="payment-note">
                   You will not be charged right now. Subscription will only
@@ -268,7 +205,8 @@ function SubscriptionForm() {
                 </p>
               </div>
             </section>
-
+          </div>
+          <div>
             {/* Info Text */}
             <div className="form-info">
               <p>

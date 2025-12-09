@@ -1,0 +1,63 @@
+.card-input-container {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  background-color: white;
+  transition: border-color 0.2s;
+
+  &:focus-within {
+    border-color: #026786;
+    outline: none;
+  }
+}
+
+.card-icon-wrapper {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.card-icon {
+  color: #999;
+  width: 24px;
+  height: 24px;
+}
+
+.card-inputs-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex: 1;
+}
+
+.card-input {
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 18px;
+  color: #333;
+  padding: 0;
+
+  &::placeholder {
+    color: #999;
+  }
+
+  &.card-number-input {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &.expiry-input {
+    width: 80px;
+    text-align: center;
+  }
+
+  &.cvc-input {
+    width: 60px;
+    text-align: center;
+  }
+}
+

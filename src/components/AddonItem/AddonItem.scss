@@ -1,0 +1,91 @@
+.addon-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: #FCFCFC;
+  border: 1px solid #E6E6E6;
+  border-radius: 8px;
+  position: relative;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+
+  &.addon-item-disabled {
+    opacity: 0.6;
+    background-color: #FCFCFC;
+  }
+
+  &.addon-item-selected {
+    border: 1px solid #00A3AD;
+    background-color: #00A3AD0D;
+  }
+}
+
+.coming-soon-badge {
+  position: absolute;
+  top: -12px;
+  left: 1rem;
+  background-color: #E8E8E8;
+  color: #7C7C7C;
+  font-size: 0.75rem;
+  font-weight: 800;
+  padding: 0.1rem 0.2rem;
+  border-radius: 4px;
+}
+
+.addon-checkbox {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  border: 2px solid #026786;
+  border-radius: 50%;
+  background-color: transparent;
+  position: relative;
+  flex-shrink: 0;
+
+  &:checked {
+    background-color: #026786;
+    
+    &::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 8px;
+      height: 8px;
+      background-color: white;
+      border-radius: 50%;
+    }
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.addon-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex: 1;
+  cursor: pointer;
+}
+
+.addon-name {
+  font-size: 1rem;
+  color: #026786;
+}
+
+.addon-price {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #026786;
+}
+
