@@ -97,6 +97,8 @@ function SubscriptionForm() {
           isCompleted ? "completed" : ""
         }`}
       >
+        <span className="step-label">{step.label}</span>
+
         {isCompleted && !isActive && (
           <svg
             className="checkmark-icon"
@@ -106,7 +108,7 @@ function SubscriptionForm() {
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
-            <circle cx="10" cy="10" r="9" fill="#4CAF50" />
+            <circle cx="10" cy="10" r="9" fill="#026786" />
             <path
               d="M6 10L9 13L14 7"
               stroke="white"
@@ -117,7 +119,6 @@ function SubscriptionForm() {
           </svg>
         )}
         {isActive && <div className="active-indicator" />}
-        <span className="step-label">{step.label}</span>
       </li>
     );
   };

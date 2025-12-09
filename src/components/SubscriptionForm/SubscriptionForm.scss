@@ -19,6 +19,47 @@
 .steps-sidebar {
   width: 250px;
   flex-shrink: 0;
+  position: sticky;
+  top: 2rem;
+  align-self: flex-start;
+  max-height: calc(100vh - 4rem);
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 0.5rem;
+  
+  // Smooth scrolling
+  scroll-behavior: smooth;
+  
+  // Custom scrollbar styling
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background: #e0e0e0;
+    border-radius: 3px;
+    
+    &:hover {
+      background: #c0c0c0;
+    }
+  }
+  
+  // Firefox scrollbar styling
+  scrollbar-width: thin;
+  scrollbar-color: #e0e0e0 transparent;
+  
+  // Mobile adjustments
+  @media (max-width: 768px) {
+    position: relative;
+    top: 0;
+    width: 100%;
+    max-height: none;
+    margin-bottom: 2rem;
+  }
 }
 
 .steps-list {
@@ -29,8 +70,10 @@
 
 .step-item {
   display: flex;
+  justify-content: space-between;
   align-items: center;
   gap: 1rem;
+  font-weight: 700;
   padding: 0.75rem 0;
   position: relative;
   padding-left: 1.5rem;
@@ -47,20 +90,20 @@
     }
 
     .step-label {
-      font-weight: 600;
-      color: #333;
+      font-weight: 800;
+      color: #20b2aa;
     }
   }
 
   &.completed {
     .step-label {
-      color: #666;
+      color: #026786;
     }
   }
 
   &:not(.active):not(.completed) {
     .step-label {
-      color: #999;
+      color: #B2B2B2;
     }
   }
 }
