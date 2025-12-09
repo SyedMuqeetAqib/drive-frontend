@@ -1,67 +1,258 @@
-.navbar {
-  width: 100%;
-  background-color: #00A3AD;
+// ============================================================================
+// Navbar Component Styles
+// ============================================================================
+
+@import '../styles/animations';
+
+// ----------------------------------------------------------------------------
+// Variables
+// ----------------------------------------------------------------------------
+$navbar-primary-color: #00A3AD;
+$navbar-text-color: #FFFFFF;
+$navbar-bg-white: #FFFFFF;
+$navbar-shadow: rgba(0, 0, 0, 0.1);
+
+// Spacing
+$navbar-height-desktop: 73px;
+$navbar-height-mobile: 60px;
+$navbar-padding-horizontal: 2rem;
+$navbar-gap-desktop: 2rem;
+$navbar-gap-mobile: 1rem;
+$navbar-menu-gap-mobile: 1.5rem;
+
+// Logo dimensions
+$navbar-logo-width-desktop: 156px;
+$navbar-logo-height-desktop: 27px;
+$navbar-logo-width-mobile: 150px;
+$navbar-logo-height-mobile: 24.11px;
+
+// Avatar
+$navbar-avatar-size: 40px;
+
+// Typography
+$navbar-font-family: 'Museo Sans Rounded', sans-serif;
+$navbar-font-weight: 500;
+$navbar-font-size: 1rem;
+$navbar-letter-spacing: -0.1px;
+
+// Transitions
+$navbar-transition-duration: 0.3s;
+$navbar-transition-timing: ease-in-out;
+$navbar-link-transition: opacity 0.2s;
+
+// Z-index scale
+$z-index-hamburger: 10;
+$z-index-mobile-menu: 100;
+
+// Breakpoints
+$breakpoint-mobile: 768px;
+$breakpoint-tablet: 769px;
+
+// ----------------------------------------------------------------------------
+// Mixins
+// ----------------------------------------------------------------------------
+@mixin mobile {
+  @media (max-width: $breakpoint-mobile) {
+    @content;
+  }
 }
 
+@mixin desktop {
+  @media (min-width: $breakpoint-tablet) {
+    @content;
+  }
+}
+
+// ----------------------------------------------------------------------------
+// Base Navbar Component
+// ----------------------------------------------------------------------------
+.navbar {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: $navbar-height-desktop;
+  background: $navbar-primary-color;
+  opacity: 1;
+
+  @include mobile {
+    height: $navbar-height-mobile;
+  }
+}
+
+// ----------------------------------------------------------------------------
+// Navbar Container
+// ----------------------------------------------------------------------------
 .navbar-container {
+  position: relative;
   max-width: 100%;
   margin: 0 auto;
-  padding: 1rem 2rem;
+  padding: 0 $navbar-padding-horizontal;
+  height: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  @include mobile {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: $navbar-gap-mobile;
+  }
 }
 
+// ----------------------------------------------------------------------------
+// Hamburger Menu Button
+// ----------------------------------------------------------------------------
+.hamburger-menu {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  z-index: $z-index-hamburger;
+
+  svg {
+    display: block;
+  }
+
+  @include mobile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+// ----------------------------------------------------------------------------
+// Navbar Brand/Logo
+// ----------------------------------------------------------------------------
 .navbar-brand {
   display: flex;
   align-items: center;
+  justify-content: center;
+
+  @include desktop {
+    justify-content: flex-start;
+  }
 }
 
 .navbar-logo {
-  height: auto;
-  max-height: 40px;
-  width: auto;
+  width: $navbar-logo-width-desktop;
+  height: $navbar-logo-height-desktop;
+  opacity: 1;
+  object-fit: contain;
+
+  @include mobile {
+    width: $navbar-logo-width-mobile;
+    height: $navbar-logo-height-mobile;
+  }
 }
 
+// ----------------------------------------------------------------------------
+// Navbar Right Section
+// ----------------------------------------------------------------------------
 .navbar-right {
   display: flex;
   align-items: center;
-  gap: 2rem;
+  gap: $navbar-gap-desktop;
+
+  @include mobile {
+    gap: 0;
+    justify-content: flex-end;
+  }
 }
 
+// ----------------------------------------------------------------------------
+// Navbar Menu
+// ----------------------------------------------------------------------------
 .navbar-menu {
   display: flex;
   list-style: none;
   margin: 0;
   padding: 0;
-  gap: 2rem;
+  gap: $navbar-gap-desktop;
   align-items: center;
-}
 
-.navbar-menu li a {
-  text-decoration: none;
-  color: #FFFFFF;
-  font-family: 'Museo Sans Rounded', sans-serif;
-  font-weight: 500;
-  font-size: 1rem;
-  transition: opacity 0.2s;
+  // Menu links (desktop)
+  li {
+    a {
+      text-decoration: none;
+      text-align: right;
+      letter-spacing: $navbar-letter-spacing;
+      color: $navbar-text-color;
+      opacity: 1;
+      font-family: $navbar-font-family;
+      font-weight: $navbar-font-weight;
+      font-size: $navbar-font-size;
+      transition: $navbar-link-transition;
 
-  &:hover {
-    opacity: 0.8;
+      @include desktop {
+        text-align: right;
+      }
+
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+  }
+
+  // Mobile menu styles
+  @include mobile {
+    position: fixed;
+    top: $navbar-height-mobile;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    background-color: $navbar-primary-color;
+    padding: $navbar-padding-horizontal;
+    gap: $navbar-menu-gap-mobile;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity $navbar-transition-duration $navbar-transition-timing,
+                visibility $navbar-transition-duration $navbar-transition-timing;
+    z-index: $z-index-mobile-menu;
+    width: 100%;
+    box-shadow: 0 4px 6px $navbar-shadow;
+    display: flex;
+
+    // When closed, hide after animation completes
+    &:not(.mobile-open) {
+      pointer-events: none;
+    }
+
+    &.mobile-open {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+
+    li {
+      width: 100%;
+      text-align: center;
+
+      a {
+        display: block;
+        padding: 0.5rem 0;
+        text-align: center;
+      }
+    }
   }
 }
 
+// ----------------------------------------------------------------------------
+// Navbar Profile Section
+// ----------------------------------------------------------------------------
 .navbar-profile {
   display: flex;
   align-items: center;
 }
 
 .profile-avatar {
-  width: 40px;
-  height: 40px;
+  width: $navbar-avatar-size;
+  height: $navbar-avatar-size;
   border-radius: 50%;
   overflow: hidden;
-  background-color: #FFFFFF;
+  background-color: $navbar-bg-white;
   display: flex;
   align-items: center;
   justify-content: center;

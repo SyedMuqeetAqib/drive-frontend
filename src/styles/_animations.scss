@@ -1,0 +1,125 @@
+// ============================================================================
+// Reusable Animations & Effects
+// ============================================================================
+
+// ----------------------------------------------------------------------------
+// Variables
+// ----------------------------------------------------------------------------
+$animation-duration-fast: 0.15s;
+$animation-duration-normal: 0.3s;
+$animation-duration-slow: 0.5s;
+$animation-timing-ease: ease-in-out;
+$animation-timing-ease-out: ease-out;
+$animation-timing-ease-in: ease-in;
+
+// ----------------------------------------------------------------------------
+// Fade In Animation
+// ----------------------------------------------------------------------------
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+// ----------------------------------------------------------------------------
+// Fade Out Animation
+// ----------------------------------------------------------------------------
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+// ----------------------------------------------------------------------------
+// Fade In Up Animation
+// ----------------------------------------------------------------------------
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// ----------------------------------------------------------------------------
+// Fade In Down Animation
+// ----------------------------------------------------------------------------
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// ----------------------------------------------------------------------------
+// Reusable Animation Classes
+// ----------------------------------------------------------------------------
+
+// Fade In Effect
+.fade-in {
+  animation: fadeIn $animation-duration-normal $animation-timing-ease forwards;
+}
+
+.fade-in-fast {
+  animation: fadeIn $animation-duration-fast $animation-timing-ease forwards;
+}
+
+.fade-in-slow {
+  animation: fadeIn $animation-duration-slow $animation-timing-ease forwards;
+}
+
+// Fade Out Effect
+.fade-out {
+  animation: fadeOut $animation-duration-normal $animation-timing-ease forwards;
+}
+
+.fade-out-fast {
+  animation: fadeOut $animation-duration-fast $animation-timing-ease forwards;
+}
+
+.fade-out-slow {
+  animation: fadeOut $animation-duration-slow $animation-timing-ease forwards;
+}
+
+// Fade In Up Effect
+.fade-in-up {
+  animation: fadeInUp $animation-duration-normal $animation-timing-ease forwards;
+}
+
+// Fade In Down Effect
+.fade-in-down {
+  animation: fadeInDown $animation-duration-normal $animation-timing-ease forwards;
+}
+
+// ----------------------------------------------------------------------------
+// Mixins for Programmatic Use
+// ----------------------------------------------------------------------------
+@mixin fade-in($duration: $animation-duration-normal, $timing: $animation-timing-ease) {
+  animation: fadeIn $duration $timing forwards;
+}
+
+@mixin fade-out($duration: $animation-duration-normal, $timing: $animation-timing-ease) {
+  animation: fadeOut $duration $timing forwards;
+}
+
+@mixin fade-in-up($duration: $animation-duration-normal, $timing: $animation-timing-ease) {
+  animation: fadeInUp $duration $timing forwards;
+}
+
+@mixin fade-in-down($duration: $animation-duration-normal, $timing: $animation-timing-ease) {
+  animation: fadeInDown $duration $timing forwards;
+}
+
