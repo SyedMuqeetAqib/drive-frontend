@@ -1,4 +1,5 @@
-import PlanPrice from "./PlanPrice";
+import PlanPrice from '../PlanPrice/PlanPrice';
+import './PlanCard.scss';
 
 interface Feature {
   text: string;
@@ -25,24 +26,30 @@ function PlanCard({
   onChange,
 }: PlanCardProps) {
   const handleChange = () => {
-    if (onChange) {
-      onChange(id);
-    }
+    onChange?.(id);
   };
 
   return (
-    <div className={`plan-card ${selected ? "plan-card-selected" : ""}`}>
+    <div className={`plan-card ${selected ? 'plan-card-selected' : ''}`}>
       <h3 className="plan-name">{name}</h3>
+      
       <ul className="plan-features">
         {features.map((feature, index) => (
           <li key={index} className="plan-feature-item">
             {feature.icon && (
-              <img src={feature.icon} alt="" className="plan-feature-icon" />
+              <img 
+                src={feature.icon} 
+                alt="" 
+                className="plan-feature-icon" 
+              />
             )}
             <span className="plan-feature-text">{feature.text}</span>
           </li>
         ))}
       </ul>
+
+      <PlanPrice price={price} />
+
       <input
         type="radio"
         name="subscription-plan"
@@ -52,10 +59,10 @@ function PlanCard({
         defaultChecked={defaultChecked}
         onChange={handleChange}
       />
-      <PlanPrice price={price} />
       <label htmlFor={`plan-${id}`} className="plan-label" />
     </div>
   );
 }
 
 export default PlanCard;
+

@@ -7,6 +7,12 @@ interface CardInputProps {
   onCvcChange?: (value: string) => void;
 }
 
+const MAX_CARD_DIGITS = 16;
+const MAX_EXPIRY_DIGITS = 4;
+const MAX_CVC_DIGITS = 3;
+const CARD_NUMBER_MAX_LENGTH = 19; // 16 digits + 3 spaces
+const EXPIRY_MAX_LENGTH = 5; // MM/YY format
+
 function CardInput({
   onCardNumberChange,
   onExpiryChange,
@@ -19,17 +25,13 @@ function CardInput({
   const expiryRef = useRef<HTMLInputElement>(null);
   const cvcRef = useRef<HTMLInputElement>(null);
 
-  const formatCardNumber = (value: string) => {
-    // Remove all non-digits
+  const formatCardNumber = (value: string): string => {
     const digits = value.replace(/\D/g, "");
-    // Add spaces every 4 digits
     return digits.match(/.{1,4}/g)?.join(" ") || digits;
   };
 
-  const formatExpiry = (value: string) => {
-    // Remove all non-digits
+  const formatExpiry = (value: string): string => {
     const digits = value.replace(/\D/g, "");
-    // Add slash after 2 digits
     if (digits.length >= 2) {
       return `${digits.slice(0, 2)}/${digits.slice(2, 4)}`;
     }
@@ -38,13 +40,14 @@ function CardInput({
 
   const handleCardNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const formatted = formatCardNumber(e.target.value);
-    if (formatted.replace(/\s/g, "").length <= 16) {
+    const digitsOnly = formatted.replace(/\s/g, "");
+
+    if (digitsOnly.length <= MAX_CARD_DIGITS) {
       setCardNumber(formatted);
-      if (onCardNumberChange) {
-        onCardNumberChange(formatted.replace(/\s/g, ""));
-      }
-      // Auto-forward to expiry when card number is complete (16 digits)
-      if (formatted.replace(/\s/g, "").length === 16 && expiryRef.current) {
+      onCardNumberChange?.(digitsOnly);
+
+      // Auto-focus expiry when card number is complete
+      if (digitsOnly.length === MAX_CARD_DIGITS && expiryRef.current) {
         expiryRef.current.focus();
       }
     }
@@ -52,13 +55,14 @@ function CardInput({
 
   const handleExpiryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const formatted = formatExpiry(e.target.value);
-    if (formatted.replace(/\D/g, "").length <= 4) {
+    const digitsOnly = formatted.replace(/\D/g, "");
+
+    if (digitsOnly.length <= MAX_EXPIRY_DIGITS) {
       setExpiry(formatted);
-      if (onExpiryChange) {
-        onExpiryChange(formatted);
-      }
-      // Auto-forward to CVC when expiry is complete (MM/YY format)
-      if (formatted.length === 5 && cvcRef.current) {
+      onExpiryChange?.(formatted);
+
+      // Auto-focus CVC when expiry is complete
+      if (formatted.length === EXPIRY_MAX_LENGTH && cvcRef.current) {
         cvcRef.current.focus();
       }
     }
@@ -66,11 +70,9 @@ function CardInput({
 
   const handleCvcChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const digits = e.target.value.replace(/\D/g, "");
-    if (digits.length <= 3) {
+    if (digits.length <= MAX_CVC_DIGITS) {
       setCvc(digits);
-      if (onCvcChange) {
-        onCvcChange(digits);
-      }
+      onCvcChange?.(digits);
     }
   };
 
@@ -104,7 +106,7 @@ function CardInput({
           placeholder="1234 5678 1234 5678"
           value={cardNumber}
           onChange={handleCardNumberChange}
-          maxLength={19} // 16 digits + 3 spaces
+          maxLength={CARD_NUMBER_MAX_LENGTH}
         />
         <input
           ref={expiryRef}
@@ -113,7 +115,7 @@ function CardInput({
           placeholder="MM/YY"
           value={expiry}
           onChange={handleExpiryChange}
-          maxLength={5}
+          maxLength={EXPIRY_MAX_LENGTH}
         />
         <input
           ref={cvcRef}
@@ -122,7 +124,7 @@ function CardInput({
           placeholder="CVC"
           value={cvc}
           onChange={handleCvcChange}
-          maxLength={3}
+          maxLength={MAX_CVC_DIGITS}
         />
       </div>
     </div>
@@ -130,4 +132,3 @@ function CardInput({
 }
 
 export default CardInput;
-

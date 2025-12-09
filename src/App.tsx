@@ -1,6 +1,6 @@
 import "./App.scss";
-import Navbar from "./components/Navbar";
-import SubscriptionForm from "./components/SubscriptionForm";
+import Navbar from "./components/Navbar/Navbar";
+import SubscriptionForm from "./components/SubscriptionForm/SubscriptionForm";
 
 function App() {
   return (

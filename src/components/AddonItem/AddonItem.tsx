@@ -18,17 +18,21 @@ function AddonItem({
   onChange,
 }: AddonItemProps) {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (onChange && !disabled) {
+    if (!disabled && onChange) {
       onChange(id, e.target.checked);
     }
   };
 
+  const className = [
+    "addon-item",
+    disabled && "addon-item-disabled",
+    checked && "addon-item-selected",
+  ]
+    .filter(Boolean)
+    .join(" ");
+
   return (
-    <div
-      className={`addon-item ${disabled ? "addon-item-disabled" : ""} ${
-        checked ? "addon-item-selected" : ""
-      }`}
-    >
+    <div className={className}>
       {comingSoon && <div className="coming-soon-badge">Coming soon</div>}
       <label htmlFor={id} className="addon-label">
         <span className="addon-name">{name}</span>

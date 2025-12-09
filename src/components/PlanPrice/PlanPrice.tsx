@@ -1,15 +1,16 @@
+import './PlanPrice.scss';
+
 interface PlanPriceProps {
   price: string;
 }
 
 function PlanPrice({ price }: PlanPriceProps) {
-  // Check if price is "Free"
-  if (price.toLowerCase() === "free") {
+  const isFree = price.toLowerCase() === 'free';
+  const monthMatch = price.match(/^(\$[\d,]+\.?\d*)\s*\/\s*month?$/i);
+
+  if (isFree) {
     return <p className="plan-price">{price}</p>;
   }
-
-  // Check if price contains "/month" or "/mo"
-  const monthMatch = price.match(/^(\$[\d,]+\.?\d*)\s*\/\s*month?$/i);
 
   if (monthMatch) {
     const amount = monthMatch[1];
@@ -21,8 +22,8 @@ function PlanPrice({ price }: PlanPriceProps) {
     );
   }
 
-  // Default: render as-is
   return <p className="plan-price">{price}</p>;
 }
 
 export default PlanPrice;
+

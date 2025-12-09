@@ -1,0 +1,211 @@
+// Subscription Form Container
+.subscription-form-container {
+  width: 100%;
+  min-height: calc(100vh - 80px);
+  background-color: #fcfcfc;
+  padding: 2rem;
+  margin-top: 2rem;
+  margin-bottom: 5rem;
+}
+
+.subscription-form-layout {
+  display: flex;
+  max-width: 1400px;
+  margin: 0 auto;
+  gap: 3rem;
+}
+
+// Left Sidebar - Steps
+.steps-sidebar {
+  width: 250px;
+  flex-shrink: 0;
+}
+
+.steps-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.step-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem 0;
+  position: relative;
+  padding-left: 1.5rem;
+
+  &.active {
+    .active-indicator {
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background-color: #20b2aa;
+      border-radius: 0 2px 2px 0;
+    }
+
+    .step-label {
+      font-weight: 600;
+      color: #333;
+    }
+  }
+
+  &.completed {
+    .step-label {
+      color: #666;
+    }
+  }
+
+  &:not(.active):not(.completed) {
+    .step-label {
+      color: #999;
+    }
+  }
+}
+
+.checkmark-icon {
+  flex-shrink: 0;
+}
+
+.step-label {
+  font-size: 0.95rem;
+  color: #666;
+  transition: color 0.2s;
+}
+
+// Main Form Content
+.form-content {
+  position: relative;
+  flex: 1;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-section-header {
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid #E6E6E6;
+  padding: 2rem;
+  padding-bottom: 1.5rem;
+}
+
+.section-title {
+  font-size: 32px;
+  font-weight: 700;
+  color: #026786;
+  margin: 0 0 0.5rem 0;
+}
+
+.form-subtitle {
+  font-size: 20px;
+  color: #4A4A4A;
+  font-weight: 500;
+}
+
+.form-section-content {
+  border-bottom: 1px solid #E6E6E6;
+  padding: 2rem;
+}
+
+.form-title {
+  font-size: 22px;
+  padding-bottom: 1.5rem;
+  font-weight: 500;
+  opacity: 1;
+  color: #4A4A4A;
+}
+
+// Subscription Plans
+.plans-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 1rem;
+  align-items: stretch;
+}
+
+// Add-ons
+.addons-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+// Payment Form
+.payment-form {
+  max-width: 480px;
+}
+
+.payment-note {
+  font-size: 15px;
+  color: #B2B2B2;
+  margin-top: 0.5rem;
+  line-height: 1.5;
+  font-weight: 500;
+}
+
+// Info Text
+.form-info {
+  padding: 0.5rem 2rem;
+  border-radius: 6px;
+
+  p {
+    font-size: 0.9rem;
+    color: #4A4A4A;
+    margin: 0.5rem 0;
+    line-height: 1.6;
+  }
+}
+
+.info-link {
+  color: #20b2aa;
+  text-decoration: none;
+  font-weight: 800;
+  text-decoration: underline;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+// Form Actions
+.form-actions {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100vw;
+  display: flex;
+  justify-content: flex-end;
+  padding: 1rem 2rem;
+  background-color: white;
+  border-top: 1px solid #E6E6E6;
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.05);
+  z-index: 100;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.btn-next {
+  background-color: #ffd700;
+  color: #333;
+  border: none;
+  border-radius: 6px;
+  padding: 0.875rem 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: #ffed4e;
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
