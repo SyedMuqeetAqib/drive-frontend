@@ -1,11 +1,14 @@
 import "./App.scss";
 import Navbar from "./components/Navbar";
+import SubscriptionForm from "./components/SubscriptionForm";
 
 function App() {
   return (
     <>
       <Navbar />
-      <main className="main-content">{/* Your content goes here */}</main>
+      <main className="main-content">
+        <SubscriptionForm />
+      </main>
     </>
   );
 }
