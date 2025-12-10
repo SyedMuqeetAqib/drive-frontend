@@ -1,5 +1,5 @@
-import PlanPrice from '../PlanPrice/PlanPrice';
-import './PlanCard.scss';
+import PlanPrice from "../PlanPrice/PlanPrice";
+import "./PlanCard.scss";
 
 interface Feature {
   text: string;
@@ -30,18 +30,14 @@ function PlanCard({
   };
 
   return (
-    <div className={`plan-card ${selected ? 'plan-card-selected' : ''}`}>
+    <div className={`plan-card ${selected ? "plan-card-selected" : ""}`}>
       <h3 className="plan-name">{name}</h3>
-      
+
       <ul className="plan-features">
         {features.map((feature, index) => (
           <li key={index} className="plan-feature-item">
             {feature.icon && (
-              <img 
-                src={feature.icon} 
-                alt="" 
-                className="plan-feature-icon" 
-              />
+              <img src={feature.icon} alt="" className="plan-feature-icon" />
             )}
             <span className="plan-feature-text">{feature.text}</span>
           </li>
@@ -65,4 +61,3 @@ function PlanCard({
 }
 
 export default PlanCard;
-

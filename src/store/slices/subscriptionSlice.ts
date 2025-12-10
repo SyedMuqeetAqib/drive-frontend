@@ -1,4 +1,5 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
+import { DEFAULT_SELECTED_PLAN } from "../../constants/subscriptionConstants";
 
 interface SubscriptionState {
   selectedPlan: string;
@@ -11,7 +12,7 @@ interface SubscriptionState {
 }
 
 const initialState: SubscriptionState = {
-  selectedPlan: "best-mates",
+  selectedPlan: DEFAULT_SELECTED_PLAN,
   selectedAddons: [],
   cardDetails: {
     cardNumber: "",

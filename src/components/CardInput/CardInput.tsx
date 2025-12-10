@@ -1,11 +1,17 @@
 import { useRef, useState } from "react";
-import "./CardInput.scss";
 import { useAppSelector, useAppDispatch } from "../../store/hooks";
 import {
   setCardNumber,
   setExpiry,
   setCvc,
 } from "../../store/slices/subscriptionSlice";
+import {
+  MAX_CARD_DIGITS,
+  MAX_EXPIRY_DIGITS,
+  MAX_CVC_DIGITS,
+  EXPIRY_MAX_LENGTH,
+} from "../../constants/cardInputConstants";
+import CardInputUI from "../../ui/CardInput/CardInput";
 
 interface CardInputProps {
   onCardNumberChange?: (value: string) => void;
@@ -13,12 +19,7 @@ interface CardInputProps {
   onCvcChange?: (value: string) => void;
 }
 
-const MAX_CARD_DIGITS = 16;
-const MAX_EXPIRY_DIGITS = 4;
-const MAX_CVC_DIGITS = 3;
-const CARD_NUMBER_MAX_LENGTH = 19; // 16 digits + 3 spaces
-const EXPIRY_MAX_LENGTH = 5; // MM/YY format
-
+// Formatting utility functions
 const formatCardNumber = (value: string): string => {
   const digits = value.replace(/\D/g, "");
   return digits.match(/.{1,4}/g)?.join(" ") || digits;
@@ -32,6 +33,7 @@ const formatExpiry = (value: string): string => {
   return digits;
 };
 
+// Container Component with Logic
 function CardInput({
   onCardNumberChange,
   onExpiryChange,
@@ -92,57 +94,16 @@ function CardInput({
   };
 
   return (
-    <div className="card-input-container">
-      <div className="card-icon-wrapper">
-        <svg
-          className="card-icon"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <rect
-            x="2"
-            y="5"
-            width="20"
-            height="14"
-            rx="2"
-            stroke="currentColor"
-            strokeWidth="2"
-          />
-          <path d="M2 10H22" stroke="currentColor" strokeWidth="2" />
-        </svg>
-      </div>
-      <div className="card-inputs-wrapper">
-        <input
-          type="text"
-          className="card-input card-number-input"
-          placeholder="1234 5678 1234 5678"
-          value={cardNumber}
-          onChange={handleCardNumberChange}
-          maxLength={CARD_NUMBER_MAX_LENGTH}
-        />
-        <input
-          ref={expiryRef}
-          type="text"
-          className="card-input expiry-input"
-          placeholder="MM/YY"
-          value={expiry}
-          onChange={handleExpiryChange}
-          maxLength={EXPIRY_MAX_LENGTH}
-        />
-        <input
-          ref={cvcRef}
-          type="text"
-          className="card-input cvc-input"
-          placeholder="CVC"
-          value={cvc}
-          onChange={handleCvcChange}
-          maxLength={MAX_CVC_DIGITS}
-        />
-      </div>
-    </div>
+    <CardInputUI
+      cardNumber={cardNumber}
+      expiry={expiry}
+      cvc={cvc}
+      onCardNumberChange={handleCardNumberChange}
+      onExpiryChange={handleExpiryChange}
+      onCvcChange={handleCvcChange}
+      expiryRef={expiryRef}
+      cvcRef={cvcRef}
+    />
   );
 }
 
