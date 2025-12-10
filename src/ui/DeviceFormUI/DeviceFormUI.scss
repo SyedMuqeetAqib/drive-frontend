@@ -1,0 +1,392 @@
+// Device Form Container - Reusing Subscription Form Styles
+.device-form-container {
+  width: 100%;
+  min-height: calc(100vh - 80px);
+  background-color: #fcfcfc;
+  padding: 2rem;
+  margin-top: 2rem;
+  margin-bottom: 5rem;
+}
+
+.device-form-layout {
+  display: flex;
+  max-width: 1400px;
+  margin: 0 auto;
+  gap: 3rem;
+}
+.device-form-fields-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  align-items: start;
+
+  .form-title {
+    grid-column: 1 / -1;
+    margin-bottom: 0;
+  }
+
+  .device-form-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  > div:last-child {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+}
+// Left Sidebar - Steps (reusing from subscription)
+.steps-sidebar {
+  width: 250px;
+  flex-shrink: 0;
+  position: sticky;
+  top: 2rem;
+  align-self: flex-start;
+  max-height: calc(100vh - 4rem);
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 0.5rem;
+  
+  scroll-behavior: smooth;
+  
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background: #e0e0e0;
+    border-radius: 3px;
+    
+    &:hover {
+      background: #c0c0c0;
+    }
+  }
+  
+  scrollbar-width: thin;
+  scrollbar-color: #e0e0e0 transparent;
+  
+  @media (max-width: 768px) {
+    position: relative;
+    top: 0;
+    width: 100%;
+    max-height: none;
+    margin-bottom: 2rem;
+  }
+}
+
+.steps-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.step-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  font-weight: 700;
+  padding: 0.75rem 0;
+  position: relative;
+  padding-left: 1.5rem;
+
+  &.active {
+    .active-indicator {
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background-color: #20b2aa;
+      border-radius: 0 2px 2px 0;
+    }
+
+    .step-label {
+      font-weight: 800;
+      color: #20b2aa;
+    }
+  }
+
+  &.completed {
+    .step-label {
+      color: #026786;
+    }
+  }
+
+  &:not(.active):not(.completed) {
+    .step-label {
+      color: #B2B2B2;
+    }
+  }
+}
+
+.checkmark-icon {
+  flex-shrink: 0;
+}
+
+.step-label {
+  font-size: 22px;
+  color: #666;
+  transition: color 0.2s;
+}
+
+// Main Form Content
+.form-content {
+  position: relative;
+  flex: 1;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-section-header {
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid #E6E6E6;
+  padding: 2rem;
+  padding-bottom: 1.5rem;
+}
+
+.section-title {
+  font-size: 32px;
+  font-weight: 700;
+  color: #026786;
+  margin: 0 0 0.5rem 0;
+}
+
+.form-subtitle {
+  font-size: 20px;
+  color: #4A4A4A;
+  font-weight: 500;
+}
+
+.form-section-content {
+  border-bottom: 1px solid #E6E6E6;
+  padding: 2rem;
+}
+
+.form-title {
+  font-size: 22px;
+  padding-bottom: 1.5rem;
+  font-weight: 500;
+  opacity: 1;
+  color: #4A4A4A;
+}
+
+// Device Form Fields
+.device-form-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.field-label {
+  font-size: 16px;
+  font-weight: 500;
+  color: #4A4A4A;
+}
+
+.form-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid #E6E6E6;
+  border-radius: 6px;
+  font-size: 16px;
+  color: #4A4A4A;
+  transition: border-color 0.2s;
+
+  &:focus {
+    outline: none;
+    border-color: #20b2aa;
+  }
+
+  &::placeholder {
+    color: #B2B2B2;
+  }
+}
+
+// Toggle Field
+.toggle-field {
+  margin-top: 0.5rem;
+}
+
+.toggle-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.toggle-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 1rem;
+}
+
+.toggle-text {
+  font-size: 16px;
+  font-weight: 500;
+  color: #4A4A4A;
+}
+
+.toggle-wrapper {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.toggle-input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggle-slider {
+  position: relative;
+  display: inline-block;
+  width: 48px;
+  height: 24px;
+  background-color: #E6E6E6;
+  border-radius: 24px;
+  transition: background-color 0.3s;
+
+  &::before {
+    content: "";
+    position: absolute;
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    border-radius: 50%;
+    transition: transform 0.3s;
+  }
+}
+
+.toggle-input:checked + .toggle-slider {
+  background-color: #20b2aa;
+}
+
+.toggle-input:checked + .toggle-slider::before {
+  transform: translateX(24px);
+}
+
+.toggle-description {
+  font-size: 14px;
+  color: #B2B2B2;
+  margin: 0;
+  line-height: 1.5;
+}
+
+// Upload Field
+.upload-container {
+  margin-top: 0.5rem;
+}
+
+.upload-box {
+  width: 80%;
+  min-height: 120px;
+  border: 1px dashed #E6E6E6;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: border-color 0.2s, background-color 0.2s;
+  background-color: #FAFAFA;
+
+  &:hover {
+    border-color: #20b2aa;
+    background-color: #F5F5F5;
+  }
+}
+
+.upload-text {
+  color: #026786;
+  font-size: 16px;
+  text-decoration: underline;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.image-preview-container {
+  position: relative;
+  width: 100%;
+  max-width: 300px;
+}
+
+.image-preview {
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+  border: 1px solid #E6E6E6;
+}
+
+.remove-image-btn {
+  margin-top: 0.5rem;
+  padding: 0.5rem 1rem;
+  background-color: #ff4444;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: #cc0000;
+  }
+}
+
+// Form Actions
+.form-actions {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100vw;
+  display: flex;
+  justify-content: flex-end;
+  padding: 1rem 2rem;
+  background-color: white;
+  border-top: 1px solid #E6E6E6;
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.05);
+  z-index: 100;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.btn-next {
+  background-color: #ffd700;
+  color: #333;
+  border: none;
+  border-radius: 6px;
+  padding: 0.875rem 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  width: 301px;
+
+  &:hover {
+    background-color: #ffed4e;
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+}

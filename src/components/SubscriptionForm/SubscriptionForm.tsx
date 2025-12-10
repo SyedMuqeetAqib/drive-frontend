@@ -10,7 +10,7 @@ import {
   ADDONS,
 } from "../../constants/subscriptionConstants";
 
-function SubscriptionForm() {
+function SubscriptionForm({ onNext }: { onNext: () => void }) {
   const dispatch = useAppDispatch();
   const selectedPlan = useAppSelector(
     (state) => state.subscription.selectedPlan
@@ -37,6 +37,7 @@ function SubscriptionForm() {
       selectedAddons={selectedAddonsSet}
       onPlanChange={handlePlanChange}
       onAddonToggle={handleAddonToggle}
+      onNext={onNext}
     />
   );
 }

@@ -11,6 +11,7 @@ import {
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import subscriptionReducer from "./slices/subscriptionSlice";
+import deviceReducer from "./slices/deviceSlice";
 
 const persistConfig = {
   key: "root",
@@ -23,6 +24,7 @@ const persistedReducer = persistReducer(persistConfig, subscriptionReducer);
 export const store = configureStore({
   reducer: {
     subscription: persistedReducer,
+    device: deviceReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

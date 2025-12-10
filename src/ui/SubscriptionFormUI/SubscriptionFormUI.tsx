@@ -33,6 +33,7 @@ export interface SubscriptionFormUIProps {
   selectedAddons: Set<string>;
   onPlanChange: (planId: string) => void;
   onAddonToggle: (id: string) => void;
+  onNext?: () => void;
 }
 
 // Pure UI Component
@@ -44,6 +45,7 @@ function SubscriptionFormUI({
   selectedAddons,
   onPlanChange,
   onAddonToggle,
+  onNext,
 }: SubscriptionFormUIProps) {
   const renderStepIndicator = (step: Step) => {
     const isActive = step.active === true;
@@ -174,7 +176,7 @@ function SubscriptionFormUI({
 
           {/* Next Button */}
           <div className="form-actions">
-            <button type="button" className="btn-next">
+            <button type="button" className="btn-next" onClick={onNext}>
               Next
             </button>
           </div>
