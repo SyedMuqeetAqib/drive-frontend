@@ -1,3 +1,4 @@
+import React from "react";
 import PlanPrice from "../PlanPrice/PlanPrice";
 import "./PlanCard.scss";
 
@@ -25,8 +26,26 @@ function PlanCard({
   defaultChecked = false,
   onChange,
 }: PlanCardProps) {
+  const radioRef = React.useRef<HTMLInputElement>(null);
+
   const handleChange = () => {
     onChange?.(id);
+  };
+
+  const handleLabelClick = (e: React.MouseEvent<HTMLLabelElement>) => {
+    // Prevent default scroll behavior when clicking the label
+    e.preventDefault();
+    // Manually check the radio and trigger change
+    if (radioRef.current) {
+      radioRef.current.checked = true;
+      handleChange();
+    }
+  };
+
+  const handleRadioFocus = (e: React.FocusEvent<HTMLInputElement>) => {
+    // Prevent scroll when radio receives focus by immediately blurring
+    // The radio doesn't need to maintain focus for accessibility
+    e.target.blur();
   };
 
   return (
@@ -47,6 +66,7 @@ function PlanCard({
       <PlanPrice price={price} />
 
       <input
+        ref={radioRef}
         type="radio"
         name="subscription-plan"
         id={`plan-${id}`}
@@ -54,8 +74,13 @@ function PlanCard({
         className="plan-radio"
         defaultChecked={defaultChecked}
         onChange={handleChange}
+        onFocus={handleRadioFocus}
       />
-      <label htmlFor={`plan-${id}`} className="plan-label" />
+      <label
+        htmlFor={`plan-${id}`}
+        className="plan-label"
+        onClick={handleLabelClick}
+      />
     </div>
   );
 }
