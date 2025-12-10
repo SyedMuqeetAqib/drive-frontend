@@ -37,104 +37,6 @@
     gap: 1.5rem;
   }
 }
-// Left Sidebar - Steps (reusing from subscription)
-.steps-sidebar {
-  width: 200px;
-  flex-shrink: 0;
-  position: sticky;
-  top: 2rem;
-  align-self: flex-start;
-  max-height: calc(100vh - 4rem);
-  overflow-y: auto;
-  overflow-x: hidden;
-  padding-right: 0.5rem;
-  
-  scroll-behavior: smooth;
-  
-  &::-webkit-scrollbar {
-    width: 6px;
-  }
-  
-  &::-webkit-scrollbar-track {
-    background: transparent;
-  }
-  
-  &::-webkit-scrollbar-thumb {
-    background: #e0e0e0;
-    border-radius: 3px;
-    
-    &:hover {
-      background: #c0c0c0;
-    }
-  }
-  
-  scrollbar-width: thin;
-  scrollbar-color: #e0e0e0 transparent;
-  
-  @media (max-width: 768px) {
-    position: relative;
-    top: 0;
-    width: 100%;
-    max-height: none;
-    margin-bottom: 2rem;
-  }
-}
-
-.steps-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.step-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 1rem;
-  font-weight: 700;
-  padding: 0.75rem 0;
-  position: relative;
-  padding-left: 1.5rem;
-
-  &.active {
-    .active-indicator {
-      position: absolute;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      width: 4px;
-      background-color: #20b2aa;
-      border-radius: 0 2px 2px 0;
-    }
-
-    .step-label {
-      font-weight: 800;
-      color: #20b2aa;
-    }
-  }
-
-  &.completed {
-    .step-label {
-      color: #026786;
-    }
-  }
-
-  &:not(.active):not(.completed) {
-    .step-label {
-      color: #B2B2B2;
-    }
-  }
-}
-
-.checkmark-icon {
-  flex-shrink: 0;
-}
-
-.step-label {
-  font-size: 22px;
-  color: #666;
-  transition: color 0.2s;
-}
 
 // Main Form Content
 .form-content {
@@ -143,6 +45,10 @@
   background-color: white;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  @media (max-width: 768px) {
+    box-shadow: none;
+    border-radius: 0;
+  }
 }
 
 .form-section-header {
@@ -368,6 +274,11 @@
   z-index: 100;
   margin: 0;
   box-sizing: border-box;
+
+  @media (max-width: 768px) {
+    padding: 1rem;
+    justify-content: center;
+  }
 }
 
 .btn-next {
@@ -381,6 +292,7 @@
   cursor: pointer;
   transition: background-color 0.2s;
   width: 301px;
+  box-sizing: border-box;
 
   &:hover {
     background-color: #ffed4e;
@@ -388,5 +300,10 @@
 
   &:active {
     transform: scale(0.98);
+  }
+
+  @media (max-width: 768px) {
+    width: 80%;
+    max-width: 80%;
   }
 }

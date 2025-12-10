@@ -22,6 +22,11 @@
   box-sizing: border-box;
 }
 
+html {
+  overflow-x: hidden;
+  width: 100%;
+}
+
 :root {
   font-family: 'Museo Sans Rounded', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
   line-height: 1.5;
@@ -42,5 +47,7 @@ body {
   min-width: 320px;
   min-height: 100vh;
   background-color: #FCFCFC;
+  overflow-x: hidden;
+  width: 100%;
 }
 

@@ -1,6 +1,6 @@
 import "./DeviceFormUI.scss";
 import { useRef } from "react";
-import type { Step } from "../SubscriptionFormUI/SubscriptionFormUI";
+import StepsAside, { type Step } from "../StepsAside/StepsAside";
 
 export interface Device {
   id: string;
@@ -28,43 +28,6 @@ function DeviceFormUI({
 }: DeviceFormUIProps) {
   const fileInputRefs = useRef<{ [key: string]: HTMLInputElement | null }>({});
 
-  const renderStepIndicator = (step: Step) => {
-    const isActive = step.active === true;
-    const isCompleted = step.completed === true;
-
-    return (
-      <li
-        key={step.id}
-        className={`step-item ${isActive ? "active" : ""} ${
-          isCompleted ? "completed" : ""
-        }`}
-      >
-        <span className="step-label">{step.label}</span>
-
-        {isCompleted && !isActive && (
-          <svg
-            className="checkmark-icon"
-            width="20"
-            height="20"
-            viewBox="0 0 20 20"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <circle cx="10" cy="10" r="9" fill="#026786" />
-            <path
-              d="M6 10L9 13L14 7"
-              stroke="white"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        )}
-        {isActive && <div className="active-indicator" />}
-      </li>
-    );
-  };
-
   const handleFileChange = (
     deviceId: string,
     e: React.ChangeEvent<HTMLInputElement>
@@ -89,10 +52,8 @@ function DeviceFormUI({
   return (
     <div className="device-form-container">
       <div className="device-form-layout">
-        {/* Left Sidebar - Step Indicators */}
-        <aside className="steps-sidebar">
-          <ul className="steps-list">{steps.map(renderStepIndicator)}</ul>
-        </aside>
+        {/* Steps Aside - Desktop sidebar / Mobile dropdown */}
+        <StepsAside steps={steps} />
 
         {/* Main Form Content */}
         <div className="form-content">

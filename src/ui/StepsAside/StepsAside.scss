@@ -1,0 +1,216 @@
+// Steps Aside Component - Reusable for both desktop sidebar and mobile dropdown
+
+// Mobile Dropdown
+.steps-dropdown-mobile {
+  display: none;
+  position: relative;
+  width: 100%;
+  margin-bottom: 1.5rem;
+  z-index: 10;
+
+  @media (max-width: 768px) {
+    display: block;
+  }
+}
+
+.steps-dropdown-trigger {
+  width: 100%;
+  background-color: white;
+  border: 1px solid #E6E6E6;
+  border-radius: 6px;
+  padding: 0.875rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  transition: border-color 0.2s;
+  font-size: 16px;
+  color: #4A4A4A;
+  font-weight: 500;
+
+  &:hover {
+    border-color: #20b2aa;
+  }
+
+  &:focus {
+    outline: none;
+    border-color: #20b2aa;
+  }
+}
+
+.dropdown-text {
+  flex: 1;
+  text-align: left;
+}
+
+.dropdown-chevron {
+  flex-shrink: 0;
+  margin-left: 0.5rem;
+  transition: transform 0.2s;
+
+  &.open {
+    transform: rotate(180deg);
+  }
+}
+
+.steps-dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: white;
+  border: 1px solid #E6E6E6;
+  border-radius: 6px;
+  margin-top: 0.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  max-height: 300px;
+  overflow-y: auto;
+  z-index: 100;
+}
+
+.dropdown-item {
+  width: 100%;
+  padding: 0.875rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-size: 16px;
+  color: #4A4A4A;
+  font-weight: 500;
+  transition: background-color 0.2s;
+  border-bottom: 1px solid #F5F5F5;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &:hover {
+    background-color: #F9F9F9;
+  }
+
+  &.active {
+    background-color: #F0FDFC;
+    color: #20b2aa;
+    font-weight: 700;
+  }
+
+  &.completed {
+    color: #026786;
+  }
+
+  &:not(.active):not(.completed) {
+    color: #B2B2B2;
+  }
+}
+
+.dropdown-item-label {
+  flex: 1;
+}
+
+.dropdown-checkmark {
+  flex-shrink: 0;
+  margin-left: 0.5rem;
+}
+
+// Desktop Sidebar
+.steps-sidebar {
+  width: 200px;
+  flex-shrink: 0;
+  position: sticky;
+  top: 2rem;
+  align-self: flex-start;
+  max-height: calc(100vh - 4rem);
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 0.5rem;
+  
+  // Smooth scrolling
+  scroll-behavior: smooth;
+  
+  // Custom scrollbar styling
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background: #e0e0e0;
+    border-radius: 3px;
+    
+    &:hover {
+      background: #c0c0c0;
+    }
+  }
+  
+  // Firefox scrollbar styling
+  scrollbar-width: thin;
+  scrollbar-color: #e0e0e0 transparent;
+  
+  // Hide on mobile
+  @media (max-width: 768px) {
+    display: none;
+  }
+}
+
+.steps-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.step-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  font-weight: 700;
+  padding: 0.75rem 0;
+  position: relative;
+  padding-left: 1.5rem;
+
+  &.active {
+    .active-indicator {
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background-color: #20b2aa;
+      border-radius: 0 2px 2px 0;
+    }
+
+    .step-label {
+      font-weight: 800;
+      color: #20b2aa;
+    }
+  }
+
+  &.completed {
+    .step-label {
+      color: #026786;
+    }
+  }
+
+  &:not(.active):not(.completed) {
+    .step-label {
+      color: #B2B2B2;
+    }
+  }
+}
+
+.checkmark-icon {
+  flex-shrink: 0;
+}
+
+.step-label {
+  font-size: 22px;
+  color: #666;
+  transition: color 0.2s;
+}
