@@ -1,4 +1,3 @@
-import { useState } from "react";
 import "./SubscriptionForm.scss";
 import PlanCard from "../PlanCard/PlanCard";
 import AddonItem from "../AddonItem/AddonItem";
@@ -6,6 +5,11 @@ import CardInput from "../CardInput/CardInput";
 import lockIcon from "../../assets/icons/Lock.svg";
 import eIcon from "../../assets/icons/e.svg";
 import groupIcon from "../../assets/icons/Group 5171.svg";
+import { useAppSelector, useAppDispatch } from "../../store/hooks";
+import {
+  setSelectedPlan,
+  toggleAddon,
+} from "../../store/slices/subscriptionSlice";
 
 // Constants
 const FORM_STEPS = [
@@ -71,19 +75,21 @@ const ADDONS = [
 ];
 
 function SubscriptionForm() {
-  const [selectedPlan, setSelectedPlan] = useState("best-mates");
-  const [selectedAddons, setSelectedAddons] = useState<Set<string>>(new Set());
+  const dispatch = useAppDispatch();
+  const selectedPlan = useAppSelector(
+    (state) => state.subscription.selectedPlan
+  );
+  const selectedAddons = useAppSelector(
+    (state) => state.subscription.selectedAddons
+  );
+  const selectedAddonsSet = new Set(selectedAddons);
 
-  const handleAddonToggle = (id: string, checked: boolean) => {
-    setSelectedAddons((prev) => {
-      const newSet = new Set(prev);
-      if (checked) {
-        newSet.add(id);
-      } else {
-        newSet.delete(id);
-      }
-      return newSet;
-    });
+  const handlePlanChange = (planId: string) => {
+    dispatch(setSelectedPlan(planId));
+  };
+
+  const handleAddonToggle = (id: string) => {
+    dispatch(toggleAddon(id));
   };
 
   const renderStepIndicator = (step: (typeof FORM_STEPS)[0]) => {
@@ -154,7 +160,7 @@ function SubscriptionForm() {
                     features={plan.features}
                     selected={selectedPlan === plan.id}
                     defaultChecked={plan.id === "best-mates"}
-                    onChange={setSelectedPlan}
+                    onChange={handlePlanChange}
                   />
                 ))}
               </div>
@@ -173,7 +179,7 @@ function SubscriptionForm() {
                     key={addon.id}
                     id={addon.id}
                     name={addon.name}
-                    checked={selectedAddons.has(addon.id)}
+                    checked={selectedAddonsSet.has(addon.id)}
                     disabled={addon.disabled}
                     comingSoon={addon.comingSoon}
                     onChange={handleAddonToggle}

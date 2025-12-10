@@ -113,7 +113,7 @@
 }
 
 .step-label {
-  font-size: 0.95rem;
+  font-size: 22px;
   color: #666;
   transition: color 0.2s;
 }
@@ -242,6 +242,7 @@
   font-weight: 600;
   cursor: pointer;
   transition: background-color 0.2s;
+  width: 301px;
 
   &:hover {
     background-color: #ffed4e;
