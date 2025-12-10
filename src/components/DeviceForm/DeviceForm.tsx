@@ -8,11 +8,12 @@ function DeviceForm({ onNext }: { onNext: () => void }) {
   const dispatch = useAppDispatch();
   const devices = useAppSelector((state) => state.device.devices);
 
-  // Update steps to show Device as active
+  // Update steps to show Device as active and Subscription as completed
   const deviceSteps = FORM_STEPS.map((step) => ({
     ...step,
     active: step.id === "device",
-    completed: step.id !== "device" && step.completed,
+    completed:
+      step.id === "subscription" || (step.id !== "device" && step.completed),
   }));
 
   const handleDeviceUpdate = (id: string, updates: Partial<Device>) => {
