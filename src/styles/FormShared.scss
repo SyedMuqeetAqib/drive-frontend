@@ -1,0 +1,96 @@
+// Shared Form Styles
+// Common styles used by both SubscriptionFormUI and DeviceFormUI
+
+@use './variables' as *;
+@use './mixins' as *;
+
+// Steps Aside Containers
+.steps-aside-container-desktop {
+  display: block;
+  @include mobile {
+    display: none;
+  }
+}
+
+.steps-aside-container-mobile {
+  display: none;
+  @include mobile {
+    display: block;
+    padding: $form-padding-mobile-small;
+  }
+}
+
+// Main Form Content
+.form-content {
+  @include form-content-base;
+}
+
+// Form Section Header
+.form-section-header {
+  @include form-section-header-base;
+}
+
+.section-title {
+  font-size: $font-size-xxl;
+  font-weight: $font-weight-extrabold;
+  color: $color-primary;
+  margin: 0 0 $spacing-xs 0;
+}
+
+.form-subtitle {
+  font-size: $font-size-lg;
+  color: $color-text-primary;
+  font-weight: $font-weight-normal;
+}
+
+// Form Section Content
+.form-section-content {
+  @include form-section-content-base;
+}
+
+.form-title {
+  font-size: $font-size-xl;
+  padding-bottom: $spacing-lg;
+  font-weight: $font-weight-normal;
+  opacity: 1;
+  color: $color-text-primary;
+}
+
+// Form Actions
+.form-actions {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100vw;
+  display: flex;
+  justify-content: flex-end;
+  padding: $spacing-md $spacing-xl;
+  background-color: $color-background-white;
+  border-top: 1px solid $color-border;
+  box-shadow: 0 -2px 8px $color-shadow-light;
+  z-index: $z-index-form-actions;
+  margin: 0;
+  box-sizing: border-box;
+
+  @include mobile {
+    padding: $spacing-md;
+    justify-content: center;
+  }
+}
+
+.btn-next {
+  @include button-base;
+  background-color: $color-button;
+  color: $color-text-dark;
+  width: $button-width-desktop;
+
+  &:hover {
+    background-color: $color-button-hover;
+  }
+
+  @include mobile {
+    width: $button-width-mobile;
+    max-width: $button-width-mobile;
+  }
+}

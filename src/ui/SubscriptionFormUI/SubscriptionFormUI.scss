@@ -1,136 +1,26 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+@import '../../styles/FormShared.scss';
+
 // Subscription Form Container
 .subscription-form-container {
-  width: 100%;
-  min-height: calc(100vh - 80px);
-  background-color: #fcfcfc;
-  padding: 2rem;
-  margin-top: 2rem;
-  margin-bottom: 5rem;
-  box-sizing: border-box;
-  overflow-x: hidden;
-
-  @media (max-width: 768px) {
-    padding: 0;
-    margin-top: 1rem;
-  }
+  @include form-container-base;
 }
 
 .subscription-form-layout {
-  display: flex;
-  max-width: 1400px;
-  margin: 0 auto;
-  gap: 3rem;
-  width: 100%;
-  box-sizing: border-box;
-
-  @media (max-width: 768px) {
-    gap: 0;
-  }
-}
-
-.steps-aside-container-desktop {
-  display: block;
-  @media (max-width: 768px) {
-    display: none;
-  }
-}
-
-.steps-aside-container-mobile {
-  display: none;
-  @media (max-width: 768px) {
-    display: block;
-  }
-}
-// Main Form Content
-.form-content {
-  position: relative;
-  flex: 1;
-  background-color: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  box-sizing: border-box;
-  overflow-x: hidden;
-
-  @media (max-width: 768px) {
-    background-color: transparent;
-    box-shadow: none;
-    border-radius: 0;
-  }
-}
-
-.form-section-header {
-  display: flex;
-  flex-direction: column;
-  border-bottom: 1px solid #E6E6E6;
-  padding: 2rem;
-  padding-bottom: 1.5rem;
-  box-sizing: border-box;
-
-  @media (max-width: 768px) {
-    padding: 1rem;
-    padding-bottom: 1rem;
-    background-color: #fcfcfc;
-    border: none;
-  }
-}
-
-.section-title {
-  font-size: 32px;
-  font-weight: 700;
-  color: #026786;
-  margin: 0 0 0.5rem 0;
-}
-
-.form-subtitle {
-  font-size: 20px;
-  color: #4A4A4A;
-  font-weight: 500;
-}
-
-.form-section-content {
-  border-bottom: 1px solid #E6E6E6;
-  padding: 2rem;
-  box-sizing: border-box;
-
-  @media (max-width: 768px) {
-    padding: 1rem;
-  }
-}
-
-.form-title {
-  font-size: 22px;
-  padding-bottom: 1.5rem;
-  font-weight: 500;
-  opacity: 1;
-  color: #4A4A4A;
+  @include form-layout-base;
 }
 
 // Subscription Plans
 .plans-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
-  margin-bottom: 1rem;
+  @include grid-base(3, 1);
+  margin-bottom: $spacing-md;
   align-items: stretch;
-  width: 100%;
-  box-sizing: border-box;
-
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
 }
 
 // Add-ons
 .addons-list {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1rem;
-
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr;
-  }
+  @include grid-base(2, 1);
 }
 
 // Payment Form
@@ -139,89 +29,39 @@
   width: 100%;
   box-sizing: border-box;
 
-  @media (max-width: 768px) {
+  @include mobile {
     max-width: 100%;
   }
 }
 
 .payment-note {
-  font-size: 15px;
-  color: #B2B2B2;
-  margin-top: 0.5rem;
-  line-height: 1.5;
-  font-weight: 500;
+  font-size: $font-size-base;
+  color: $color-text-tertiary;
+  margin-top: $spacing-xs;
+  line-height: $line-height-base;
+  font-weight: $font-weight-normal;
 }
 
 // Info Text
 .form-info {
-  padding: 0.5rem 2rem;
-  border-radius: 6px;
+  padding: $spacing-xs $spacing-xl;
+  border-radius: $input-border-radius;
 
   p {
-    font-size: 0.9rem;
-    color: #4A4A4A;
-    margin: 0.5rem 0;
-    line-height: 1.6;
+    font-size: $font-size-xs;
+    color: $color-text-primary;
+    margin: $spacing-xs 0;
+    line-height: $line-height-tight;
   }
 }
 
 .info-link {
-  color: #20b2aa;
-  text-decoration: none;
-  font-weight: 800;
+  color: $color-accent;
   text-decoration: underline;
+  font-weight: $font-weight-extrabold;
 
   &:hover {
     text-decoration: underline;
   }
 }
 
-// Form Actions
-.form-actions {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  width: 100vw;
-  display: flex;
-  justify-content: flex-end;
-  padding: 1rem 2rem;
-  background-color: white;
-  border-top: 1px solid #E6E6E6;
-  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.05);
-  z-index: 100;
-  margin: 0;
-  box-sizing: border-box;
-
-  @media (max-width: 768px) {
-    padding: 1rem;
-    justify-content: center;
-  }
-}
-
-.btn-next {
-  background-color: #ffd700;
-  color: #333;
-  border: none;
-  border-radius: 6px;
-  padding: 0.875rem 2rem;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background-color 0.2s;
-  width: 301px;
-  box-sizing: border-box;
-
-  &:hover {
-    background-color: #ffed4e;
-  }
-
-  &:active {
-    transform: scale(0.98);
-  }
-
-  @media (max-width: 768px) {
-    width: 80%;
-    max-width: 80%;
-  }
-}

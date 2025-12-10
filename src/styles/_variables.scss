@@ -1,0 +1,108 @@
+// Form Variables
+// Centralized variables for form components
+
+// ============================================================================
+// Colors
+// ============================================================================
+$color-primary: #026786;
+$color-primary-light: #00A3AD;
+$color-accent: #20b2aa;
+$color-accent-hover: #ffed4e;
+$color-button: #ffd700;
+$color-button-hover: #ffed4e;
+$color-danger: #ff4444;
+$color-danger-hover: #cc0000;
+
+$color-text-primary: #4A4A4A;
+$color-text-secondary: #666;
+$color-text-tertiary: #B2B2B2;
+$color-text-dark: #333;
+
+$color-background: #fcfcfc;
+$color-background-white: #ffffff;
+$color-background-light: #FAFAFA;
+$color-background-lighter: #F5F5F5;
+$color-background-accent: #00A3AD0D;
+
+$color-border: #E6E6E6;
+$color-border-light: #e0e0e0;
+
+$color-shadow: rgba(0, 0, 0, 0.1);
+$color-shadow-light: rgba(0, 0, 0, 0.05);
+
+// ============================================================================
+// Spacing
+// ============================================================================
+$spacing-xs: 0.5rem;
+$spacing-sm: 0.75rem;
+$spacing-md: 1rem;
+$spacing-lg: 1.5rem;
+$spacing-xl: 2rem;
+$spacing-xxl: 3rem;
+
+// ============================================================================
+// Typography
+// ============================================================================
+$font-size-xs: 0.9rem;
+$font-size-sm: 14px;
+$font-size-base: 15px;
+$font-size-md: 16px;
+$font-size-lg: 20px;
+$font-size-xl: 22px;
+$font-size-xxl: 32px;
+
+$font-weight-normal: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+$font-weight-extrabold: 800;
+
+$line-height-base: 1.5;
+$line-height-tight: 1.6;
+
+// ============================================================================
+// Breakpoints
+// ============================================================================
+$breakpoint-mobile: 768px;
+$breakpoint-desktop: 769px;
+
+// ============================================================================
+// Layout
+// ============================================================================
+$container-max-width: 1400px;
+$form-content-border-radius: 8px;
+$form-content-border-radius-mobile: 0;
+$input-border-radius: 6px;
+$button-border-radius: 6px;
+
+// ============================================================================
+// Z-index
+// ============================================================================
+$z-index-form-actions: 100;
+$z-index-dropdown: 10;
+
+// ============================================================================
+// Transitions
+// ============================================================================
+$transition-fast: 0.2s;
+$transition-base: 0.3s;
+
+// ============================================================================
+// Form Specific
+// ============================================================================
+$form-padding-desktop: $spacing-xl;
+$form-padding-mobile: $spacing-md;
+$form-padding-mobile-small: $spacing-xs $spacing-md;
+
+$form-gap-desktop: $spacing-xxl;
+$form-gap-mobile: 0;
+
+$form-min-height: calc(100vh - 80px);
+$form-margin-top-desktop: $spacing-xl;
+$form-margin-top-mobile: $spacing-md;
+$form-margin-bottom: 5rem;
+
+$button-width-desktop: 301px;
+$button-width-mobile: 80%;
+
+$grid-gap-desktop: $spacing-lg;
+$grid-gap-mobile: $spacing-md;

@@ -1,23 +1,17 @@
-// Device Form Container - Reusing Subscription Form Styles
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+@import '../../styles/FormShared.scss';
+
+// Device Form Container
 .device-form-container {
-  width: 100%;
-  min-height: calc(100vh - 80px);
-  background-color: #fcfcfc;
-  padding: 2rem;
-  margin-top: 2rem;
-  margin-bottom: 5rem;
+  @include form-container-base;
 }
 
 .device-form-layout {
-  display: flex;
-  max-width: 1400px;
-  margin: 0 auto;
-  gap: 3rem;
+  @include form-layout-base;
 }
 .device-form-fields-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.5rem;
+  @include grid-base(2, 1);
   align-items: start;
 
   .form-title {
@@ -28,123 +22,76 @@
   .device-form-fields {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: $spacing-lg;
   }
 
   > div:last-child {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: $spacing-lg;
   }
 }
 
-// Main Form Content
+// Device Form Specific Styles
 .form-content {
-  position: relative;
-  flex: 1;
-  background-color: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  @media (max-width: 768px) {
-    box-shadow: none;
-    border-radius: 0;
+  min-height: 200px;
+
+  @include mobile {
+    display: block;
+    visibility: visible;
+    opacity: 1;
   }
-}
-
-.form-section-header {
-  display: flex;
-  flex-direction: column;
-  border-bottom: 1px solid #E6E6E6;
-  padding: 2rem;
-  padding-bottom: 1.5rem;
-}
-
-.section-title {
-  font-size: 32px;
-  font-weight: 700;
-  color: #026786;
-  margin: 0 0 0.5rem 0;
-}
-
-.form-subtitle {
-  font-size: 20px;
-  color: #4A4A4A;
-  font-weight: 500;
-}
-
-.form-section-content {
-  border-bottom: 1px solid #E6E6E6;
-  padding: 2rem;
-}
-
-.form-title {
-  font-size: 22px;
-  padding-bottom: 1.5rem;
-  font-weight: 500;
-  opacity: 1;
-  color: #4A4A4A;
 }
 
 // Device Form Fields
 .device-form-fields {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: $spacing-lg;
 }
 
 .form-field {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: $spacing-xs;
 }
 
 .field-label {
-  font-size: 16px;
-  font-weight: 500;
-  color: #4A4A4A;
+  font-size: $font-size-md;
+  font-weight: $font-weight-normal;
+  color: $color-text-primary;
 }
 
 .form-input {
-  width: 100%;
-  padding: 0.75rem 1rem;
-  border: 1px solid #E6E6E6;
-  border-radius: 6px;
-  font-size: 16px;
-  color: #4A4A4A;
-  transition: border-color 0.2s;
-
-  &:focus {
-    outline: none;
-    border-color: #20b2aa;
-  }
-
-  &::placeholder {
-    color: #B2B2B2;
-  }
+  @include input-base;
 }
 
 // Toggle Field
 .toggle-field {
-  margin-top: 0.5rem;
+  margin-top: $spacing-xs;
 }
 
 .toggle-container {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: $spacing-xs;
 }
 
 .toggle-row {
   display: grid;
   grid-template-columns: 1fr auto;
   align-items: center;
-  gap: 1rem;
+  gap: $spacing-md;
+
+  @include mobile {
+    gap: $spacing-sm;
+  }
 }
 
 .toggle-text {
-  font-size: 16px;
-  font-weight: 500;
-  color: #4A4A4A;
+  font-size: $font-size-md;
+  font-weight: $font-weight-normal;
+  color: $color-text-primary;
 }
 
 .toggle-wrapper {
@@ -165,9 +112,9 @@
   display: inline-block;
   width: 48px;
   height: 24px;
-  background-color: #E6E6E6;
+  background-color: $color-border;
   border-radius: 24px;
-  transition: background-color 0.3s;
+  transition: background-color $transition-base;
 
   &::before {
     content: "";
@@ -176,14 +123,14 @@
     width: 18px;
     left: 3px;
     bottom: 3px;
-    background-color: white;
+    background-color: $color-background-white;
     border-radius: 50%;
-    transition: transform 0.3s;
+    transition: transform $transition-base;
   }
 }
 
 .toggle-input:checked + .toggle-slider {
-  background-color: #20b2aa;
+  background-color: $color-accent;
 }
 
 .toggle-input:checked + .toggle-slider::before {
@@ -191,40 +138,45 @@
 }
 
 .toggle-description {
-  font-size: 14px;
-  color: #B2B2B2;
+  font-size: $font-size-sm;
+  color: $color-text-tertiary;
   margin: 0;
-  line-height: 1.5;
+  line-height: $line-height-base;
 }
 
 // Upload Field
 .upload-container {
-  margin-top: 0.5rem;
+  margin-top: $spacing-xs;
 }
 
 .upload-box {
   width: 80%;
   min-height: 120px;
-  border: 1px dashed #E6E6E6;
-  border-radius: 6px;
+  border: 1px dashed $color-border;
+  border-radius: $input-border-radius;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: border-color 0.2s, background-color 0.2s;
-  background-color: #FAFAFA;
+  transition: border-color $transition-fast, background-color $transition-fast;
+  background-color: $color-background-light;
+  box-sizing: border-box;
 
   &:hover {
-    border-color: #20b2aa;
-    background-color: #F5F5F5;
+    border-color: $color-accent;
+    background-color: $color-background-lighter;
+  }
+
+  @include mobile {
+    width: 100%;
   }
 }
 
 .upload-text {
-  color: #026786;
-  font-size: 16px;
+  color: $color-primary;
+  font-size: $font-size-md;
   text-decoration: underline;
-  font-weight: 700;
+  font-weight: $font-weight-bold;
   cursor: pointer;
 }
 
@@ -237,73 +189,24 @@
 .image-preview {
   width: 100%;
   height: auto;
-  border-radius: 6px;
-  border: 1px solid #E6E6E6;
+  border-radius: $input-border-radius;
+  border: 1px solid $color-border;
 }
 
 .remove-image-btn {
-  margin-top: 0.5rem;
-  padding: 0.5rem 1rem;
-  background-color: #ff4444;
-  color: white;
+  margin-top: $spacing-xs;
+  padding: $spacing-xs $spacing-md;
+  background-color: $color-danger;
+  color: $color-background-white;
   border: none;
-  border-radius: 6px;
-  font-size: 14px;
-  font-weight: 500;
+  border-radius: $input-border-radius;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-normal;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: background-color $transition-fast;
 
   &:hover {
-    background-color: #cc0000;
+    background-color: $color-danger-hover;
   }
 }
 
-// Form Actions
-.form-actions {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  width: 100vw;
-  display: flex;
-  justify-content: flex-end;
-  padding: 1rem 2rem;
-  background-color: white;
-  border-top: 1px solid #E6E6E6;
-  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.05);
-  z-index: 100;
-  margin: 0;
-  box-sizing: border-box;
-
-  @media (max-width: 768px) {
-    padding: 1rem;
-    justify-content: center;
-  }
-}
-
-.btn-next {
-  background-color: #ffd700;
-  color: #333;
-  border: none;
-  border-radius: 6px;
-  padding: 0.875rem 2rem;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background-color 0.2s;
-  width: 301px;
-  box-sizing: border-box;
-
-  &:hover {
-    background-color: #ffed4e;
-  }
-
-  &:active {
-    transform: scale(0.98);
-  }
-
-  @media (max-width: 768px) {
-    width: 80%;
-    max-width: 80%;
-  }
-}

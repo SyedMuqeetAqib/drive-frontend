@@ -1,0 +1,164 @@
+// Form Mixins
+// Reusable mixins for form components
+
+@use './variables' as *;
+
+// ============================================================================
+// Media Queries
+// ============================================================================
+@mixin mobile {
+  @media (max-width: $breakpoint-mobile) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: $breakpoint-desktop) {
+    @content;
+  }
+}
+
+// ============================================================================
+// Form Container Base
+// ============================================================================
+@mixin form-container-base {
+  width: 100%;
+  min-height: $form-min-height;
+  background-color: $color-background;
+  padding: $form-padding-desktop;
+  margin-top: $form-margin-top-desktop;
+  margin-bottom: $form-margin-bottom;
+  box-sizing: border-box;
+  overflow-x: hidden;
+
+  @include mobile {
+    padding: 0;
+    margin-top: $form-margin-top-mobile;
+  }
+}
+
+// ============================================================================
+// Form Layout Base
+// ============================================================================
+@mixin form-layout-base {
+  display: flex;
+  max-width: $container-max-width;
+  margin: 0 auto;
+  gap: $form-gap-desktop;
+  width: 100%;
+  box-sizing: border-box;
+
+  @include mobile {
+    gap: $form-gap-mobile;
+  }
+}
+
+// ============================================================================
+// Form Content Base
+// ============================================================================
+@mixin form-content-base {
+  position: relative;
+  flex: 1;
+  background-color: $color-background-white;
+  border-radius: $form-content-border-radius;
+  box-shadow: 0 2px 8px $color-shadow;
+  width: 100%;
+  box-sizing: border-box;
+  overflow-x: hidden;
+
+  @include mobile {
+    background-color: transparent;
+    box-shadow: none;
+    border-radius: $form-content-border-radius-mobile;
+  }
+}
+
+// ============================================================================
+// Form Section Header Base
+// ============================================================================
+@mixin form-section-header-base {
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid $color-border;
+  padding: $form-padding-desktop;
+  padding-bottom: $spacing-lg;
+  box-sizing: border-box;
+
+  @include mobile {
+    padding: $form-padding-mobile;
+    padding-bottom: $form-padding-mobile;
+    background-color: $color-background;
+    border: none;
+  }
+}
+
+// ============================================================================
+// Form Section Content Base
+// ============================================================================
+@mixin form-section-content-base {
+  border-bottom: 1px solid $color-border;
+  padding: $form-padding-desktop;
+  box-sizing: border-box;
+
+  @include mobile {
+    padding: $form-padding-mobile;
+  }
+}
+
+// ============================================================================
+// Button Base
+// ============================================================================
+@mixin button-base {
+  border: none;
+  border-radius: $button-border-radius;
+  padding: $spacing-sm $spacing-xl;
+  font-size: $font-size-md;
+  font-weight: $font-weight-semibold;
+  cursor: pointer;
+  transition: background-color $transition-fast;
+  box-sizing: border-box;
+
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+// ============================================================================
+// Input Base
+// ============================================================================
+@mixin input-base {
+  width: 100%;
+  padding: $spacing-sm $spacing-md;
+  border: 1px solid $color-border;
+  border-radius: $input-border-radius;
+  font-size: $font-size-md;
+  color: $color-text-primary;
+  transition: border-color $transition-fast;
+  box-sizing: border-box;
+  max-width: 100%;
+
+  &:focus {
+    outline: none;
+    border-color: $color-accent;
+  }
+
+  &::placeholder {
+    color: $color-text-tertiary;
+  }
+}
+
+// ============================================================================
+// Grid Base
+// ============================================================================
+@mixin grid-base($columns-desktop, $columns-mobile: 1) {
+  display: grid;
+  grid-template-columns: repeat($columns-desktop, 1fr);
+  gap: $grid-gap-desktop;
+  width: 100%;
+  box-sizing: border-box;
+
+  @include mobile {
+    grid-template-columns: repeat($columns-mobile, 1fr);
+    gap: $grid-gap-mobile;
+  }
+}

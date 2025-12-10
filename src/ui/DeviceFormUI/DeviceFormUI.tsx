@@ -51,9 +51,14 @@ function DeviceFormUI({
 
   return (
     <div className="device-form-container">
+      <div className="steps-aside-container-mobile">
+        <StepsAside steps={steps} />
+      </div>
       <div className="device-form-layout">
         {/* Steps Aside - Desktop sidebar / Mobile dropdown */}
-        <StepsAside steps={steps} />
+        <div className="steps-aside-container-desktop">
+          <StepsAside steps={steps} />
+        </div>
 
         {/* Main Form Content */}
         <div className="form-content">
