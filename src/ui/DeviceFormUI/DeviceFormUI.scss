@@ -1,6 +1,6 @@
 @use '../../styles/variables' as *;
 @use '../../styles/mixins' as *;
-@import '../../styles/FormShared.scss';
+@use '../../styles/FormShared.scss' as *;
 
 // Device Form Container
 .device-form-container {
